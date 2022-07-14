@@ -1,0 +1,49 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+  </style>
+
+{% if request.user.is_authenticated == 1 %}
+    <p> Input dates and see the tournaments </p>
+    <form method = "post">{% csrf_token %}
+    <label for="start_date">Start date:</label><br>
+    <input type="datetime-local" id="start_date" name="start_date" ><br>
+    <label for="start_date">End date:</label><br>
+    <input type="datetime-local" id="end_date" name="end_date"  ><br>
+    <input type="submit" value="Search">
+    </form>
+{% endif %}
+<br></br>
+<table>
+    <tr> 
+        <th> Name </th>
+        <th> Begin date </th>
+        <th> End date </th>
+        <th> Maximum number of players </th>
+    </tr>
+    {% for item in tournament %}
+    <tr> 
+        <td>  {{ item.name }} </td>
+        <td>{{ item.begin_date }}</td>
+        <td>{{ item.end_date }}</td>
+        <td>{{ item.max_number_of_player }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+
+  <form method = "post">{% csrf_token %}
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email" ><br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" ><br>
+    <label for="birth_date">Birth date:</label><br>
+    <input type="date" id="birth_date" name="birth_date" ><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Register">
+  </form>
+
+{% endblock %}

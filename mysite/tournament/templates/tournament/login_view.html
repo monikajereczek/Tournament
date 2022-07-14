@@ -1,0 +1,12 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+
+<form method = "post">{% csrf_token %}
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" ><br>
+  <label for="password">Password:</label><br>
+  <input type="password" id="password" name="password"><br><br>
+  <input type="submit" value="Login">
+</form>
+  
+{% endblock %}

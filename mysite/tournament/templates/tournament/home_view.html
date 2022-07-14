@@ -1,0 +1,12 @@
+{% extends "tournament/base_view.html" %}
+{% block  page_detail %}<strong class="nav-active"></strong>
+
+    <h2>Welcome to tournaments!</h1>
+    {% if request.user.is_authenticated == 0 %}
+    <p>To see ongoing tournaments clik Tournaments tab</p>
+    {% endif%}
+    {% if request.user.is_authenticated == 1 %}
+    <p>You can manage a tournament by choosing it in Tournaments tab</p>
+    {% endif%}
+  
+{% endblock %}  

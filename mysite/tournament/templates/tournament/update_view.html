@@ -1,0 +1,17 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+<style>
+   
+    form {
+      margin-left: 50px;
+    }
+</style>
+    
+    <form  method="GET">   
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form> 
+
+{{form.errors}}
+{% endblock %}

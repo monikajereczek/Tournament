@@ -1,0 +1,39 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+</style>
+
+
+<table>
+  <tr> 
+    <th> Name </th>
+    <th> Begin date </th>
+    <th> End date </th>
+    <th> Maximum number of players </th>
+</tr>
+    {% for item in tournament %}
+    <tr> 
+        <td> <a href="{% url 'tournament:tournament' item.id %}"> {{ item.name }} </a> </td>
+        <td>{{ item.begin_date }}</td>
+        <td>{{ item.end_date }}</td>
+        <td>{{ item.max_number_of_player }}</td>
+       </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

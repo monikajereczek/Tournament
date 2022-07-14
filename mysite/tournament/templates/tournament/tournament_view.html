@@ -1,0 +1,79 @@
+{% extends "tournament/base_view.html" %}
+{% block page_detail%}<strong class="nav-active"></strong>
+
+
+<style>
+    .button1 {
+        border: none;
+        color: black;
+        margin-left: 40px;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        float: rigth;
+        overflow:hidden;
+        position: relative;
+        background-color: white;
+      }
+    .button1:hover{
+        background-color: #aaf7eb;
+    }
+
+</style>
+
+    <div class="column">
+        <h2> Details of tournament </h2>
+        <p>Name: {{tournament.name}} </p>
+        <p>Begin date: {{ tournament.begin_date }} </p>
+        <p>End date: {{ tournament.end_date }} </p>
+        <p>Maximum number of players: {{ tournament.max_number_of_player }}</p>
+        
+        <h3> Players in this tournament</h3>
+        <table>
+            {% for x in player_in_tournamets %}
+                <tr> 
+                    <td>{{ x.player.name }} </td> 
+                    <td><form action="{{tournament.id}}/{{x.player.id}}/delete_player_from_tournament" method="POST">
+                        {% csrf_token %}
+                        <button class="mm-button mm-small mm-circle">-</button> 
+                    </form></td> 
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br></br>
+        <form action="{{tournament.id}}/delete" method="POST">
+            {% csrf_token %}
+            <button class="button1" value="1" name="delete_button">Delete this tournament</button>
+        </form> 
+        <form action="{{tournament.id}}/update" method="POST">
+            {% csrf_token %}
+            <button class="button1" value="1" name="update_button">Update this tournament</button>
+        </form> 
+    </div>
+
+    <div class="column">
+        <h3> Choose players for this tournament</h3>
+        <table>
+            {% for p in player %}
+            <tr> 
+                <td>{{ p.name }}  </td>
+                <td>
+                    <form action="{{tournament.id}}/{{p.id}}/add_player" method="POST">
+                        {% csrf_token %}
+                        <button class="mm-button mm-small mm-circle">+</button> 
+                    </form>
+                   
+                </td>
+            </tr>
+            {% endfor %}
+        </table>    
+        
+
+    </div>
+
+
+
+{% endblock %}

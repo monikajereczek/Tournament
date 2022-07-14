@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'tournament/style.css' %}" >
+<style>
+body {margin:20px;}
+
+.button {
+    border: none;
+    color: black;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    float: rigth;
+    overflow:hidden;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    background-color: white;
+  }
+.button:hover{
+    background-color: #aaf7eb;
+}
+
+ul {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: fixed;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: right;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: #ffffff;
+}
+
+li a:hover:not(.active) {
+  background-color: #aaf7eb;
+}
+
+.active {
+  background-color: #aaf7eb;
+}
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  display: table;
+  float: left;
+  padding: 10px;
+  height: 400px;
+  width: 600px;
+
+}
+.row {
+  display: table;
+  height: 100px;
+  width: 1200px;
+
+}
+
+</style>
+</head>
+<body style="background-color:white;">
+
+<div class="row">
+    {% block nav %}
+        <ul id="nav">
+            <li>{% block nav-home_view %} <a href="{% url 'tournament:home_view' %}">Home</a>{% endblock %}</li>
+            {% if request.user.is_authenticated == 0 %}
+            <li>{% block nav-login_view %} <a href="{% url 'tournament:login_view' %}">Login</a>{% endblock %}</li> 
+            <li>{% block nav-register_view %} <a href="{% url 'tournament:register_view' %}">Register</a>{% endblock %}</li>
+            <li>{% block nav-tournament_table_view %} <a href="{% url 'tournament:tournaments' %}">Current Tournaments</a>{% endblock %}</li>
+            {% endif%}
+            {% if request.user.is_authenticated == 1 %}
+            <li>{% block nav-create_tournament %} <a href="{% url 'tournament:create_tournament' %}">Create New Tournament</a>{% endblock %}</li>
+            <li>{% block nav-create_player %} <a href="{% url 'tournament:create_player' %}">Create New Player</a>{% endblock %}</li>
+            <li>{% block nav-tournament_my_table_view %} <a href="{% url 'tournament:my_tournaments' %}">My Tournaments</a>{% endblock %}</li>
+            <li>{% block nav-user_tournament_table_view %} <a href="{% url 'tournament:tournaments' %}">Search Past Tournaments</a>{% endblock %}</li>
+            <li>{% block nav-logout %} <a href="{% url 'tournament:logout_view' %}">Logout</a>{% endblock %}</li>
+            {% endif%}
+        </ul>
+        
+
+      {% endblock %}
+</div>
+
+
+     
+<div class="row" >
+        {% block page_detail%}
+        {% endblock %}
+</div>
+  
+<div class="row">
+  {% if messages %}
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+  {% endif %}
+</div>  
+
+</body>
+</html>
+
